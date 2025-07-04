@@ -4,9 +4,12 @@ import { AppCard } from "./app-card"
 
 interface AppGridProps {
   apps: App[]
+  comparisonList: string[]
+  onCompareToggle: (appId: string) => void
+  onCardClick: (app: App) => void
 }
 
-export const AppGrid: FC<AppGridProps> = ({ apps }) => {
+export const AppGrid: FC<AppGridProps> = ({ apps, comparisonList, onCompareToggle, onCardClick }) => {
   return (
     <main>
       <div className="results-header">
@@ -23,14 +26,10 @@ export const AppGrid: FC<AppGridProps> = ({ apps }) => {
         {apps.map((app) => (
           <AppCard
             key={app.id}
-            id={app.id}
-            name={app.name}
-            vendor={app.vendor}
-            description={app.description}
-            features={app.features}
-            logo={app.logo}
-            isFeatured={app.isFeatured}
-            rating={app.rating}
+            app={app}
+            isCompared={comparisonList.includes(app.id)}
+            onCompareToggle={onCompareToggle}
+            onCardClick={onCardClick}
           />
         ))}
       </div>
