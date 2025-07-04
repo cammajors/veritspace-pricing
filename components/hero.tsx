@@ -11,7 +11,7 @@ export const Hero: FC<HeroProps> = ({ searchQuery, onSearchChange }) => {
   return (
     <section className="hero">
       <h1>Business Application Directory</h1>
-      <p>We support 200+ software applications for CPA firms, accounting professionals, and SMBs</p>
+      <p>We support 300+ software applications for CPA firms, accounting professionals, and SMBs</p>
       <div className="search-container">
         <input
           type="text"

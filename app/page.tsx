@@ -97,6 +97,7 @@ export default function Home() {
         />
         <AppGrid
           apps={filteredApps}
+          totalApps={apps.length}
           comparisonList={comparisonList}
           onCompareToggle={handleCompareToggle}
           onCardClick={handleAppClick}

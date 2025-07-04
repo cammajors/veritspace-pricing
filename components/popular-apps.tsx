@@ -1,25 +1,31 @@
 import type { FC } from "react"
 import Link from "next/link"
+import { getAppById } from "@/lib/apps"
 
-const popularAppsData = [
-  { id: "ultratax-cs", name: "UltraTax CS", logo: "U" },
-  { id: "quickbooks-desktop", name: "QuickBooks Desktop", logo: "Q" },
-  { id: "drake-tax", name: "Drake Tax", logo: "D" },
-  { id: "lacerte", name: "Lacerte", logo: "L" },
-  { id: "proseries", name: "ProSeries", logo: "P" },
-]
+const popularAppIds = ["ultratax-cs", "quickbooks-desktop", "drake-tax", "lacerte", "proseries"]
+
+const popularAppsData = popularAppIds.map((id) => getAppById(id)).filter(Boolean)
 
 export const PopularApps: FC = () => {
   return (
     <div className="popular-apps">
       <h3>Most Popular</h3>
       <div className="popular-list">
-        {popularAppsData.map((app) => (
-          <Link href={`/apps/${app.id}`} key={app.id} className="popular-item">
-            <div className="popular-icon">{app.logo}</div>
-            <span>{app.name}</span>
-          </Link>
-        ))}
+        {popularAppsData.map((app) => {
+          if (!app) return null
+          return (
+            <Link
+              href={app.liveUrl || `/apps/${app.id}`}
+              key={app.id}
+              className="popular-item"
+              target={app.liveUrl ? "_blank" : "_self"}
+              rel={app.liveUrl ? "noopener noreferrer" : ""}
+            >
+              <div className="popular-icon">{app.logo}</div>
+              <span>{app.name}</span>
+            </Link>
+          )
+        })}
       </div>
     </div>
   )

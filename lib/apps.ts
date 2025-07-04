@@ -10,6 +10,7 @@ export interface App {
   category: string
   hasDedicatedPage?: boolean
   liveUrl?: string | null
+  contextualBenefit?: string
 }
 
 const dedicatedPages: Record<string, string> = {
@@ -30,7 +31,13 @@ const dedicatedPages: Record<string, string> = {
   Quicken: "https://verito.com/quicken-hosting",
 }
 
-const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: string; tags?: string[] }[] = [
+const appsData: Omit<App, "features" | "logo" | "contextualBenefit"> &
+  {
+    features?: string[]
+    logo?: string
+    tags?: string[]
+    contextualBenefit?: string
+  }[] = [
   {
     id: "ultratax-cs",
     name: "UltraTax CS",
@@ -51,6 +58,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     isFeatured: true,
     rating: 4.8,
     category: "Tax Preparation",
+    contextualBenefit:
+      "Our high-performance servers ensure lightning-fast calculations for UltraTax CS, even on April 15th.",
   },
   {
     id: "quickbooks-desktop",
@@ -71,6 +80,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "Q",
     rating: 4.7,
     category: "Accounting",
+    contextualBenefit:
+      "Enjoy multi-user access on your QuickBooks Desktop file from anywhere, with bank-level security.",
   },
   {
     id: "drake-tax",
@@ -91,6 +102,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "D",
     rating: 4.6,
     category: "Tax Preparation",
+    contextualBenefit:
+      "Experience unmatched reliability and speed for Drake Tax, ensuring your firm stays productive during tax season.",
   },
   {
     id: "lacerte",
@@ -111,6 +124,7 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "L",
     rating: 4.5,
     category: "Tax Preparation",
+    contextualBenefit: "Handle the most complex Lacerte returns with ease on our optimized, high-speed servers.",
   },
   {
     id: "cch-axcess",
@@ -131,6 +145,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "C",
     rating: 4.4,
     category: "Tax Preparation",
+    contextualBenefit:
+      "Our high-performance servers ensure lightning-fast calculations for CCH Axcess, even on April 15th.",
   },
   {
     id: "quickbooks-online",
@@ -151,6 +167,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "Q",
     rating: 4.3,
     category: "Accounting",
+    contextualBenefit:
+      "Enhance your QuickBooks Online experience with our secure, managed environment and expert support.",
   },
   {
     id: "proseries",
@@ -171,6 +189,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "P",
     rating: 4.2,
     category: "Tax Preparation",
+    contextualBenefit:
+      "Get the reliability and speed your growing practice needs for ProSeries, backed by our 24/7 expert support.",
   },
   {
     id: "taxwise",
@@ -211,6 +231,8 @@ const appsData: Omit<App, "features" | "logo"> & { features?: string[]; logo?: s
     logo: "S",
     rating: 4.0,
     category: "Accounting",
+    contextualBenefit:
+      "Unlock true multi-user collaboration and remote access for your Sage 50 company file, backed by our 99.999% uptime guarantee.",
   },
   {
     id: "prosystem-fx-tax",
@@ -3473,6 +3495,7 @@ export const apps: App[] = appsData.map((app) => {
     category: app.category,
     hasDedicatedPage: app.hasDedicatedPage !== undefined ? app.hasDedicatedPage : hasDedicatedPage,
     liveUrl: app.liveUrl !== undefined ? app.liveUrl : liveUrl,
+    contextualBenefit: app.contextualBenefit || "",
   }
 
   return normalizedApp

@@ -31,21 +31,6 @@ export const AppCard: FC<AppCardProps> = ({ app, isCompared, onCompareToggle, on
         isCompared ? "border-green-500 shadow-lg" : "border-gray-100"
       }`}
     >
-      <div className="absolute top-4 right-4 z-10">
-        <label
-          className="flex items-center space-x-2 cursor-pointer text-sm text-gray-600 hover:text-green-600"
-          onClick={(e) => e.stopPropagation()} // Prevent card click when toggling compare
-        >
-          <input
-            type="checkbox"
-            className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
-            checked={isCompared}
-            onChange={() => onCompareToggle(id)}
-          />
-          <span>Compare</span>
-        </label>
-      </div>
-
       <div className="mt-6">
         <div className="flex items-center gap-4 mb-4">
           <div className="w-12 h-12 bg-[#0c1e2b] rounded-md flex items-center justify-center text-white text-xl flex-shrink-0">

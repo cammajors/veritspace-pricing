@@ -4,16 +4,21 @@ import { AppCard } from "./app-card"
 
 interface AppGridProps {
   apps: App[]
+  totalApps: number
   comparisonList: string[]
   onCompareToggle: (appId: string) => void
   onCardClick: (app: App) => void
 }
 
-export const AppGrid: FC<AppGridProps> = ({ apps, comparisonList, onCompareToggle, onCardClick }) => {
+export const AppGrid: FC<AppGridProps> = ({ apps, totalApps, comparisonList, onCompareToggle, onCardClick }) => {
   return (
     <main>
       <div className="results-header">
-        <span className="results-count">Showing {apps.length} applications</span>
+        <span className="results-count">
+          {apps.length === totalApps
+            ? `Showing ${totalApps} applications`
+            : `Showing ${apps.length} of ${totalApps} applications`}
+        </span>
         <select className="sort-dropdown">
           <option>Most Popular</option>
           <option>Alphabetical</option>

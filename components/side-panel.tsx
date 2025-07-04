@@ -73,16 +73,23 @@ export const SidePanel: FC<SidePanelProps> = ({ app, onClose }) => {
               <p className="text-gray-600 mb-6">{app.description}</p>
 
               <h3 className="text-lg font-semibold mb-4 text-[#0c1e2b]">Key Features</h3>
-              <ul className="space-y-3 mb-8">
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-3 mb-8">
                 {app.features.map((feature, index) => (
-                  <li key={index} className="flex items-center gap-3 text-gray-700">
+                  <div key={index} className="flex items-center gap-3 text-gray-700">
                     <div className="w-5 h-5 rounded-full bg-green-100 flex items-center justify-center flex-shrink-0">
                       <Check className="w-3 h-3 text-green-600" />
                     </div>
-                    <span>{feature}</span>
-                  </li>
+                    <span className="text-sm">{feature}</span>
+                  </div>
                 ))}
-              </ul>
+              </div>
+
+              {app.contextualBenefit && (
+                <div className="mb-8 p-4 bg-green-50 border border-green-200 rounded-lg text-center">
+                  <p className="text-sm text-green-800 italic">"{app.contextualBenefit}"</p>
+                </div>
+              )}
+
               <div className="mt-8 pt-6 border-t">
                 <h3 className="text-lg font-semibold mb-4 text-[#0c1e2b]">Why Host with Verito?</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
