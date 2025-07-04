@@ -1,6 +1,6 @@
 "use client"
 
-import type { FC } from "react"
+import type { FC, MouseEvent } from "react"
 import type { App } from "@/lib/apps"
 
 interface AppCardProps {
@@ -11,16 +11,31 @@ interface AppCardProps {
 }
 
 export const AppCard: FC<AppCardProps> = ({ app, isCompared, onCompareToggle, onCardClick }) => {
-  const { id, name, vendor, description, features, logo, rating } = app
+  const { id, name, vendor, description, features, logo, rating, hasDedicatedPage, liveUrl } = app
+
+  const handleCardClick = (e: MouseEvent<HTMLAnchorElement>) => {
+    if (!hasDedicatedPage) {
+      e.preventDefault()
+      onCardClick(app)
+    }
+    // If hasDedicatedPage is true, do nothing and let the link navigate.
+  }
 
   return (
-    <div
-      className={`bg-white rounded-md border p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 relative group ${
+    <a
+      href={hasDedicatedPage ? liveUrl : `/apps/${id}`}
+      target={hasDedicatedPage ? "_blank" : "_self"}
+      rel={hasDedicatedPage ? "noopener noreferrer" : ""}
+      onClick={handleCardClick}
+      className={`block bg-white rounded-md border p-6 shadow-sm hover:shadow-md transition-all duration-300 hover:-translate-y-1 relative group ${
         isCompared ? "border-green-500 shadow-lg" : "border-gray-100"
       }`}
     >
       <div className="absolute top-4 right-4 z-10">
-        <label className="flex items-center space-x-2 cursor-pointer text-sm text-gray-600 hover:text-green-600">
+        <label
+          className="flex items-center space-x-2 cursor-pointer text-sm text-gray-600 hover:text-green-600"
+          onClick={(e) => e.stopPropagation()} // Prevent card click when toggling compare
+        >
           <input
             type="checkbox"
             className="h-4 w-4 rounded border-gray-300 text-green-600 focus:ring-green-500"
@@ -31,8 +46,8 @@ export const AppCard: FC<AppCardProps> = ({ app, isCompared, onCompareToggle, on
         </label>
       </div>
 
-      <div onClick={() => onCardClick(app)} className="cursor-pointer">
-        <div className="flex items-center gap-4 mb-4 mt-6">
+      <div className="mt-6">
+        <div className="flex items-center gap-4 mb-4">
           <div className="w-12 h-12 bg-[#0c1e2b] rounded-md flex items-center justify-center text-white text-xl flex-shrink-0">
             {logo}
           </div>
@@ -67,6 +82,6 @@ export const AppCard: FC<AppCardProps> = ({ app, isCompared, onCompareToggle, on
           ))}
         </div>
       </div>
-    </div>
+    </a>
   )
 }
